@@ -34,9 +34,9 @@ async function run() {
 
     // Post to the contacts
     app.post('/api/contacts', async(req, res) => {
-        const toy= req.body;
-        console.log(toy);
-        const result = await ContactsCollection.insertOne(toy);
+        const contact= req.body;
+        console.log(contact);
+        const result = await ContactsCollection.insertOne(contact);
         res.send(result);
     })
 
