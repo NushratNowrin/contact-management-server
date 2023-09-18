@@ -27,7 +27,21 @@ async function run() {
 
     // get the contacts data from DB
     app.get('/api/contacts',async(req, res) => {
-        const cursor = ContactsCollection.find();
+        const query = {};
+        const cursor = ContactsCollection.find(query);
+        const result = await cursor.toArray();
+        res.send(result);
+    })
+
+    app.get('/api/contacts/descending',async(req, res) => {
+        const query = {};
+        const cursor = ContactsCollection.find(query).sort({userName: -1});
+        const result = await cursor.toArray();
+        res.send(result);
+    })
+    app.get('/api/contacts/ascending',async(req, res) => {
+        const query = {};
+        const cursor = ContactsCollection.find(query).sort({userName: 1});
         const result = await cursor.toArray();
         res.send(result);
     })
