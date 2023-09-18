@@ -1,6 +1,7 @@
 const express = require('express')
 const cors = require('cors')
 require("dotenv").config();
+const excel = require('exceljs');
 const app = express()
 const port = process.env.PORT || 5000
 
@@ -92,6 +93,49 @@ async function run() {
         const contact = await ContactsCollection.findOne(query);
         res.send(contact);
     })
+
+    // Download Excel file
+    // app.get('/api/contacts/download', async (req, res) => {
+    //     const userEmail = req.query.email;
+
+    //     // const user = await usersCollection.findOne({ email: userEmail });
+    //     const contacts = await ContactsCollection
+    //         .find({
+    //             email: userEmail,
+    //         })
+    //         .toArray();
+
+    //     const workbook = new excel.Workbook();
+    //     const worksheet = workbook.addWorksheet('Contacts Data');
+
+    //     worksheet.columns = [
+    //         { header: 'Name', key: 'name', width: 25 },
+    //         { header: 'Phone', key: 'number', width: 25 },
+    //         { header: 'Email', key: 'email', width: 40 },
+    //     ];
+
+    //     contacts.forEach((contact) => {
+    //         worksheet.addRow({
+    //             name: contact.userName,
+    //             number: contact.number,
+    //             email: contact.email,
+    //         });
+    //     });
+
+    //     res.setHeader(
+    //         'Content-Type',
+    //         'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    //     );
+    //     res.setHeader(
+    //         'Content-Disposition',
+    //         'attachment; filename=' + 'contacts_data.xlsx'
+    //     );
+
+    //     return workbook.xlsx.write(res).then(() => {
+    //         res.status(200).end();
+    //     });
+    // });
+
 
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
