@@ -33,12 +33,15 @@ async function run() {
         res.send(result);
     })
 
+    // get the descending ordered contacts data from DB
     app.get('/api/contacts/descending',async(req, res) => {
         const query = {};
         const cursor = ContactsCollection.find(query).sort({userName: -1});
         const result = await cursor.toArray();
         res.send(result);
     })
+
+    // get the ascending ordered contacts data from DB
     app.get('/api/contacts/ascending',async(req, res) => {
         const query = {};
         const cursor = ContactsCollection.find(query).sort({userName: 1});
